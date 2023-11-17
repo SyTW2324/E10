@@ -1,39 +1,44 @@
 {
-  "name": "mean-stack-example",
-  "version": "1.0.0",
-  "description": "Sample CRUD application built with the MEAN stack.",
-  "main": "index.js",
+  "name": "sytw-music-project",
+  "version": "0.0.0",
   "scripts": {
-    "start": "npm run prepare && concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:server": "cd server && npm start",
-    "start:client": "cd client && npm start",
-    "prepare": "concurrently \"npm run prepare:server\" \"npm run prepare:client\"",
-    "prepare:server": "cd server && npm install",
-    "prepare:client": "cd client && npm install",
-    "build": "npm run prepare && concurrently \"npm run build:server\" \"npm run build:client\"",
-    "build:server": "cd server && npm run build",
-    "build:client": "cd client && npm run build",
-    "test": "npm run prepare && concurrently \"npm run test:client\" \"npm run test:server\"",
-    "test:client": "cd client && npm test",
-    "test:server": "cd server && npm test"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:sytw-music-project": "node dist/sytw-music-project/server/server.mjs"
   },
-  "contributors": [
-    {
-      "name": "Abirami Sukumaran",
-      "url": "https://github.com/AbiramiSukumaran"
-    },
-    {
-      "name": "Stanimira Vlaeva",
-      "url": "https://github.com/sis0k0"
-    }
-  ],
-  "license": "Apache 2.0",
-  "homepage": "https://github.com/mongodb-developer/mean-stack-example#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mongodb-developer/mean-stack-example.git"
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/platform-server": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@angular/ssr": "^17.0.1",
+    "express": "^4.18.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "concurrently": "^7.1.0"
+    "@angular-devkit/build-angular": "^17.0.1",
+    "@angular/cli": "^17.0.1",
+    "@angular/compiler-cli": "^17.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^18.18.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.2.2"
   }
 }
