@@ -1,0 +1,99 @@
+/* login.component.css */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: rgb(186, 35, 35)808;
+      overflow-y: hidden;
+      display: flex;
+    }
+    
+    .main-container {
+      min-height: 100vh;
+      display: flex;
+      align-content: space-between;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0px;
+      
+    }  
+    
+    .header {
+      padding: 20px;
+      text-align: center;
+      background-color: #000000; /* Color de fondo del encabezado y pie de página */
+      color: white; /* Color del texto del encabezado y pie de página */
+    }
+  
+    /* login.component.css */
+  
+  .footer {
+      padding: 20px;
+      text-align: center;
+      background-color: #000000; /* Color de fondo del pie de página */
+      color: white; /* Color del texto del pie de página */
+      margin-top: auto; /* Esto fuerza al pie de página a la parte inferior */
+    }
+    
+    /*rectangulo*/
+    .container {
+      max-width: 400px;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: auto;
+      align-self: center;
+      padding: 20px;
+      background-color: #000000; /* Fondo semitransparente del rectángulo de login */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(36, 36, 36, 0.349);
+    }
+    
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: rgb(35, 213, 35);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    form {
+      max-width: 100%;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: rgb(255, 255, 255);
+    }
+    
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+      background-color: #f4f4f4; /* Color de fondo de los campos de entrada */
+      color: rgb(0, 0, 0); /* Color del texto de los campos de entrada */
+      border: 1px solid #ccc;
+    }
+    
+    button {
+      width: 100%;
+      background-color: rgb(41, 46, 41);
+      color: rgb(246, 246, 246);
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: rgb(35, 213, 35);
+    }
+    
+    .error-message {
+      color: #ff4444;
+      margin-top: 10px;
+    }
