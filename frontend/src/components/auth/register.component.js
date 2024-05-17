@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup'
-import { registerUser } from '../../firebase/firebaseAuth'
 
 import './register.component.css'
 
@@ -41,7 +40,6 @@ export function SignUp() {
         { username, password, confirmPassword },
         { abortEarly: false },
       )
-      await registerUser(username, password)
       setUsername('')
       setPassword('')
       setConfirmPassword('')

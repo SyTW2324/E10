@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup'
-import { loginUser } from '../../firebase/firebaseAuth'
 
 import { Link } from 'react-router-dom'
 import './login.component.css'
@@ -30,8 +29,7 @@ export function LoginSignIn() {
       await schema.validate({ username, password }, { abortEarly: false })
       console.log('Username:', username)
       console.log('Password:', password)
-      // Llama a la función de login de Firebase
-      await loginUser(username, password)
+      
       setUsername('')
       setPassword('')
       setErrors({})
@@ -94,9 +92,9 @@ export function LoginSignIn() {
               </button>
             </div>
             <div className="mt-4 flex justify-center">
-              <div className="flex justify-between items-center w-full max-w-md">
+              <div className="flex justify-center items-center w-full max-w-md">
                 <p>¿No tienes cuenta?</p>
-                <Link to="/signup" className="form-group-button-register">
+                <Link to="/signup" className="form-group-button">
                   Registrarse
                 </Link>
               </div>

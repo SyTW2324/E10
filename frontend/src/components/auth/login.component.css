@@ -37,6 +37,7 @@
   display: block;
   margin: 0 auto;
   margin-top: 6px;
+  align-items: center;
 }
 
 .form-group-button:hover {
