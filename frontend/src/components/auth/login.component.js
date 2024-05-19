@@ -63,7 +63,7 @@ export function LoginSignIn() {
     }
   }, [loginSuccess, navigate]);
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="max-w-md w-full space-y-8">
         <form onSubmit={handleSubmit}>
           <div className="login-form ">
