@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../redux/actions/userActions';
 
 import { Link } from 'react-router-dom'
 import './login.component.css'
@@ -8,6 +10,9 @@ export function LoginSignIn() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
+
+  const dispatch = useDispatch();
+  const loginError = useSelector((state) => state.user.error);
 
   const schema = Yup.object().shape({
     username: Yup.string().required('*El nombre de usuario es requerido'),
@@ -29,6 +34,9 @@ export function LoginSignIn() {
       await schema.validate({ username, password }, { abortEarly: false })
       console.log('Username:', username)
       console.log('Password:', password)
+
+      // Dispatch login action
+      dispatch(loginUser({ username, password }));
       
       setUsername('')
       setPassword('')

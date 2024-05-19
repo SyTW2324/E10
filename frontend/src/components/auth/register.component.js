@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup'
 
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../redux/actions/userActions';
+
 import './register.component.css'
 
 export function SignUp() {
@@ -8,6 +11,9 @@ export function SignUp() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [errors, setErrors] = useState({})
+
+  const dispatch = useDispatch();
+  const registerError = useSelector((state) => state.user.error);
 
   const schema = Yup.object().shape({
     username: Yup.string().required('*El nombre de usuario es requerido'),
@@ -40,6 +46,10 @@ export function SignUp() {
         { username, password, confirmPassword },
         { abortEarly: false },
       )
+
+      // Dispatch register action
+      dispatch(registerUser({ username, password }));
+      
       setUsername('')
       setPassword('')
       setConfirmPassword('')
