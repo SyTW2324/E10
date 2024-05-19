@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup'
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../redux/actions/userActions';
 
 import './register.component.css'
@@ -13,7 +14,9 @@ export function SignUp() {
   const [errors, setErrors] = useState({})
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const registerError = useSelector((state) => state.user.error);
+  const registerSuccess = useSelector((state) => state.user.user); 
 
   const schema = Yup.object().shape({
     username: Yup.string().required('*El nombre de usuario es requerido'),
@@ -65,6 +68,11 @@ export function SignUp() {
         console.error(error)
       }
     }
+  }
+
+  // Redirigir al usuario a la página de éxito del registro si el registro es exitoso
+  if (registerSuccess) {
+    navigate('/registersuccess');
   }
 
   return (
@@ -129,6 +137,9 @@ export function SignUp() {
                 Registrarse
               </button>
             </div>
+            {registerError && (
+              <p className="error-message mt-1 text-center">{registerError.message}</p>
+            )}
           </div>
         </form>
       </div>
