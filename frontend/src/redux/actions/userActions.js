@@ -29,3 +29,13 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+// Acción para cerrar sesión
+export const logoutUser = createAsyncThunk('user/logout', async (_, { rejectWithValue }) => {
+  try {
+    // Aquí podrías realizar cualquier limpieza necesaria, como invalidar un token en el backend
+    return true;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
