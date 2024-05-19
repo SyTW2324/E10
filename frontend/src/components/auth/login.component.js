@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../redux/actions/userActions';
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate  } from 'react-router-dom'
 import './login.component.css'
 
 export function LoginSignIn() {
@@ -12,7 +12,9 @@ export function LoginSignIn() {
   const [errors, setErrors] = useState({})
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook de useNavigate para redireccionar
   const loginError = useSelector((state) => state.user.error);
+  const loginSuccess = useSelector((state) => state.user.user);
 
   const schema = Yup.object().shape({
     username: Yup.string().required('*El nombre de usuario es requerido'),
@@ -54,6 +56,12 @@ export function LoginSignIn() {
     }
   }
 
+  // Redirigir al usuario a la página de éxito si el login es exitoso
+  useEffect(() => {
+    if (loginSuccess) {
+      navigate('/success');
+    }
+  }, [loginSuccess, navigate]);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full space-y-8">
