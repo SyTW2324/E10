@@ -107,10 +107,13 @@ export function LoginSignIn() {
                 Iniciar Sesión
               </button>
             </div>
+            {loginError && (
+              <p className="error-message mt-1 text-center">{loginError.message}</p>
+            )}
             <div className="mt-4 flex justify-center">
               <div className="flex justify-center items-center w-full max-w-md">
-                <p>¿No tienes cuenta?</p>
-                <Link to="/signup" className="form-group-button">
+                <p className='text-center'>¿No tienes cuenta?</p>
+                <Link to="/signup"  className="rounded hover:bg-blue-700 text-center mt-2 form-group-button">
                   Registrarse
                 </Link>
               </div>
