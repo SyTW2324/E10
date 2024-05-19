@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Importar el middleware cors para que permita peticiones
 const User = require('./models/User');
 
 dotenv.config();
@@ -12,6 +13,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware para parsear el cuerpo de las solicitudes
 app.use(bodyParser.json());
+
+// Configurar CORS
+app.use(cors({
+    origin: 'http://localhost:3000', // Permitir solicitudes desde el frontend
+  }));
 
 // Codificar la contraseña
 const encodedPassword = encodeURIComponent(process.env.MONGO_PASSWORD);
