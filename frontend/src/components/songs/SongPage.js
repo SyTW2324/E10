@@ -39,9 +39,10 @@ const SongPage = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-purple-800 to-purple-900">
             <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center w-full max-w-md">
-                <h1 className="text-4xl font-bold mb-4 text-blue-700">Canciones disponibles actualmente</h1>
-                {error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-red-500 text-sm">{error}</div>}
                 {!showForm && (
+                <>    
+                <h1 className="text-4xl font-bold mb-4 text-blue-700">Canciones disponibles actualmente</h1>
                 <table className="w-full mb-4">
                     <thead>
                         <tr>
@@ -58,8 +59,10 @@ const SongPage = () => {
                         ))}
                     </tbody>
                     </table>
+                    <button className="w-full p-2 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded mb-4" onClick={() => setShowForm(true)}>Añadir Canción</button>
+                </>
                 )}
-                <button className="w-full p-2 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded mb-4" onClick={() => setShowForm(true)}>Añadir Canción</button>
+                
                 {showForm && (
                    <div>
                         <p className="text-gray-700 text-lg mb-4">En el siguiente formulario podras añadir una cancion a la base de datos de MusicWiki</p>
