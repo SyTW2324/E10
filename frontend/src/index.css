@@ -1,0 +1,16 @@
+@import  'tailwindcss/base';
+@import  'tailwindcss/components';
+@import  'tailwindcss/utilities';
+
+
+body {
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#2a00b7, #42006c);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
