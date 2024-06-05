@@ -1,11 +1,8 @@
-import {React, useEffect, useState} from 'react';
+import { React, useEffect, useState } from 'react';
 import AddSongForm from './songs.component';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { addSong,fetchSongs } from '../../redux/actions/songActions'; // Asegúrate de que esta es la ruta correcta a tus acciones de Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { addSong, fetchSongs } from '../../redux/actions/songActions'; // Asegúrate de que esta es la ruta correcta a tus acciones de Redux
 import { useNavigate } from 'react-router-dom';
-import './song.component.css';
-
 
 const SongPage = () => {
     const songs = useSelector(state => state.song.songs); // Asegúrate de que esta es la ruta correcta al estado de las canciones en tu store de Redux
@@ -14,7 +11,7 @@ const SongPage = () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user.user);
     const [showForm, setShowForm] = useState(false);
-    
+
     useEffect(() => {
         dispatch(fetchSongs());
         const intervalId = setInterval(() => {
@@ -39,40 +36,36 @@ const SongPage = () => {
         }
     }, [user, navigate]);
     
-    
     return (
-        
-        <div className="flex flex-col items-center justify-center h-screen" style={{ background: 'linear-gradient(#2a00b7, #42006c)'}}>
-            <div className="bg-white p-8 rounded shadow-md text-center" style={{display: 'flex', flexDirection: 'column', height: 'fit-container ', width: 'fit-container'}} >
-                <h1 className="text-4xl font-bold mb-4 text-blue-600">Canciones disponibles actualmente</h1>
-                {error && <div>Error: {error}</div>}
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-purple-800 to-purple-900">
+            <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center w-full max-w-md">
+                <h1 className="text-4xl font-bold mb-4 text-blue-700">Canciones disponibles actualmente</h1>
+                {error && <div className="text-red-500 text-sm">{error}</div>}
                 {!showForm && (
-                <table>
+                <table className="w-full mb-4">
                     <thead>
                         <tr>
-                        <th>Nombre de la canción</th>
-                        <th>Autor</th>
+                        <th className="border-b-2 p-2">Nombre de la canción</th>
+                        <th className="border-b-2 p-2">Autor</th>
                         </tr>
                     </thead>
                     <tbody>
                         {songs.map((song) => (
                         <tr key={song.id}>
-                            <td>{song.name}</td>
-                            <td>{song.author}</td>
+                            <td className="border-b p-2">{song.name}</td>
+                            <td className="border-b p-2">{song.author}</td>
                         </tr>
                         ))}
                     </tbody>
                     </table>
                 )}
-                <button className="form-group-button" onClick={() => setShowForm(true)}>Añadir Canción</button> {/* Muestra el formulario cuando se hace clic en este botón */}
-                    {showForm && (
-                       <div>
-                            <p className="text-gray-700 text-lg">
-                            En el siguiente formulario podras añadir una cancion a la base de datos de MusicWiki
-                            </p>
-                            <AddSongForm onSubmit={handleAddSong}/>
-                        </div>
-                    )}
+                <button className="w-full p-2 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded mb-4" onClick={() => setShowForm(true)}>Añadir Canción</button>
+                {showForm && (
+                   <div>
+                        <p className="text-gray-700 text-lg mb-4">En el siguiente formulario podras añadir una cancion a la base de datos de MusicWiki</p>
+                        <AddSongForm onSubmit={handleAddSong} />
+                    </div>
+                )}
             </div>
         </div>
     );
