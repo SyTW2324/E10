@@ -20,10 +20,23 @@ export const fetchSongs = createAsyncThunk(
   'songs/fetchSongs',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/songs`); // Asegúrate de reemplazar '/api/songs' con la ruta correcta de tu API
+      const response = await axios.get(`${BASE_URL}/api/songs`);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+// Nueva acción para actualizar la letra de una canción
+export const updateSongLyrics = createAsyncThunk(
+  'song/updateSongLyrics',
+  async ({ id, lyrics }, thunkAPI) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/api/songs/${id}`, { lyrics });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

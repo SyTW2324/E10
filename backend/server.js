@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // Configurar CORS
 app.use(cors({
     origin: 'http://localhost:3000', // Permitir solicitudes desde el frontend
-  }));
+}));
 
 // Codificar la contraseña
 const encodedPassword = encodeURIComponent(process.env.MONGO_PASSWORD);
@@ -85,7 +85,7 @@ app.post('/api/songs', async (req, res) => {
     }
 
     // Crear nueva canción
-    const newSong = new Song({ name, author, duration, genres, single, reproductions});
+    const newSong = new Song({ name, author, duration, genres, single, reproductions });
 
     try {
         await newSong.save();
@@ -101,6 +101,26 @@ app.get('/api/songs', async (req, res) => {
         res.status(200).json(songs);
     } catch (error) {
         res.status(500).json({ message: 'Error al recuperar las canciones' });
+    }
+});
+
+// Ruta para actualizar la letra de una canción
+app.put('/api/songs/:id', async (req, res) => {
+    const { id } = req.params;
+    const { lyrics } = req.body;
+
+    if (!lyrics) {
+        return res.status(400).json({ message: 'La letra de la canción es requerida' });
+    }
+
+    try {
+        const song = await Song.findByIdAndUpdate(id, { lyrics }, { new: true });
+        if (!song) {
+            return res.status(404).json({ message: 'Canción no encontrada' });
+        }
+        res.status(200).json(song);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar la canción' });
     }
 });
 

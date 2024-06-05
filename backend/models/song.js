@@ -6,7 +6,8 @@ const SongSchema = new mongoose.Schema({
   duration: { type: Number, required: true },
   genres: { type: Array, required: true },
   single: { type: Boolean, required: true },
-  reproductions: { type: Number, required: true }
+  reproductions: { type: Number, required: true },
+  lyrics: { type: String, required: false }
 });
 
 module.exports = mongoose.model('Song', SongSchema);

@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import AddSongForm from './songs.component';
 import { useSelector, useDispatch } from 'react-redux';
-import { addSong, fetchSongs } from '../../redux/actions/songActions';
+import { addSong, fetchSongs, updateSongLyrics } from '../../redux/actions/songActions';
 import { useNavigate } from 'react-router-dom';
 
 const SongPage = () => {
@@ -10,8 +10,10 @@ const SongPage = () => {
     const error = useSelector(state => state.song.error);
     const navigate = useNavigate();
     const user = useSelector(state => state.user.user);
-    const [showForm, setShowForm] = useState(false);
-    const [selectedSong, setSelectedSong] = useState(null); // Nuevo estado para la canción seleccionada
+    const [showForm, setShowForm] = useState(false); // Estado mostrar formulario
+    const [selectedSong, setSelectedSong] = useState(null); // Estado seleccionar cancion
+    const [lyrics, setLyrics] = useState(''); // Estado agregar letra
+    const [message, setMessage] = useState(''); // Estado para mensajes
 
     useEffect(() => {
         dispatch(fetchSongs());
@@ -36,7 +38,20 @@ const SongPage = () => {
     }, [user, navigate]);
 
     const handleSongClick = (song) => {
-        setSelectedSong(song); // Actualiza la canción seleccionada
+        setSelectedSong(song);
+        setLyrics(song.lyrics || ''); 
+    };
+
+    const handleUpdateLyrics = async () => {
+        try {
+            await dispatch(updateSongLyrics({ id: selectedSong._id, lyrics })).unwrap();
+            setMessage('Letra actualizada con éxito');
+        } catch (error) {
+            setMessage('Error al actualizar la letra');
+        }
+        setTimeout(() => {
+            setMessage('');
+        }, 3000); // Ocultar el mensaje después de 3 segundos
     };
 
     return (
@@ -82,7 +97,16 @@ const SongPage = () => {
                         <p><strong>Géneros:</strong> {selectedSong.genres}</p>
                         <p><strong>Reproducciones:</strong> {selectedSong.reproductions}</p>
                         <p><strong>Single:</strong> {selectedSong.single ? 'Sí' : 'No'}</p>
+                        <textarea
+                            className="w-full p-2 border border-gray-300 rounded mt-2"
+                            rows="4"
+                            value={lyrics}
+                            onChange={(e) => setLyrics(e.target.value)}
+                            placeholder="Añadir letra de la canción aquí"
+                        ></textarea>
+                        <button className="mt-2 p-2 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded" onClick={handleUpdateLyrics}>Guardar Letra</button>
                         <button className="mt-2 p-2 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded" onClick={() => setSelectedSong(null)}>Cerrar</button>
+                        {message && <p className="mt-2 text-sm text-green-500">{message}</p>} {/* Mensaje de éxito o error */}
                     </div>
                 )}
             </div>
