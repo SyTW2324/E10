@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
-// queda pendiente arreglar el formato del componente y controlar que los datos sean correctos
+//queda pendiente arreglar el formato del componente y controlar que los datos sean correctos
 
 const AddSongForm = (props) => {
   const [name, setName] = useState('');
@@ -10,6 +10,7 @@ const AddSongForm = (props) => {
   const [genres, setGenres] = useState('');
   const [single, setSingle] = useState(false);
   const [reproductions, setReproductions] = useState(1);
+  const [listener, setListener] = useState(1);
   
   const songSchema = Yup.object().shape({
     name: Yup.string().required('El nombre de la canción es requerido'),
@@ -17,12 +18,13 @@ const AddSongForm = (props) => {
     duration: Yup.number().required('La duración de la canción es requerida'),
     genres: Yup.string().required('El género de la canción es requerido'),
     single: Yup.boolean(),
-    reproductions: Yup.number().integer('Las reproducciones deben ser un número entero'),
-  });
+    reproductions: Yup.number().integer('Las reproducciones debe ser un número entero'),
+    listener: Yup.number().integer('Los oyentes debe ser un número entero'),
+  })
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
+    try{
       const song = {
         name,
         author,
@@ -30,15 +32,17 @@ const AddSongForm = (props) => {
         genres,
         single,
         reproductions: Number(reproductions),
+        listener: Number(listener)
       };
       await songSchema.validate(song);
       props.onSubmit(song);
       setName('');
       setAuthor('');
-      setDuration(1);
+      setDuration('');
       setGenres('');
       setSingle(false);
-      setReproductions(1);
+      setReproductions('');
+      setListener('');
     } catch (error) {
       console.log(error);
       // TODO: Show an error message to the user
@@ -46,71 +50,18 @@ const AddSongForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-around h-full">
-      <label className="mb-2">
-        <span className="block text-gray-700">Name</span>
-        <input 
-          type="text" 
-          className="form-group-input border rounded p-2 w-full" 
-          value={name} 
-          onChange={(e) => setName(e.target.value)} 
-          placeholder="Name" 
-          required 
-        />
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',justifyContent: 'space-around', height: '100%'}}>
+      <input type="text" className='form-group-input' value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
+      <input type="text" className='form-group-input' value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" required />
+      <input type="number" className='form-group-input' value={duration} onChange={(e) => setDuration(e.target.value)} placeholder="Duration" required />
+      <input type="text" className='form-group-input' value={genres} onChange={(e) => setGenres(e.target.value)} placeholder="Genres" required />
+      <label style={{paddingRight: '0px'}}>
+        Single
+        <input type="checkbox" checked={single} onChange={(e) => setSingle(e.target.checked)} />
       </label>
-      <label className="mb-2">
-        <span className="block text-gray-700">Author</span>
-        <input 
-          type="text" 
-          className="form-group-input border rounded p-2 w-full" 
-          value={author} 
-          onChange={(e) => setAuthor(e.target.value)} 
-          placeholder="Author" 
-          required 
-        />
-      </label>
-      <label className="mb-2">
-        <span className="block text-gray-700">Duration</span>
-        <input 
-          type="number" 
-          className="form-group-input border rounded p-2 w-full" 
-          value={duration} 
-          onChange={(e) => setDuration(e.target.value)} 
-          placeholder="Duration" 
-          required 
-        />
-      </label>
-      <label className="mb-2">
-        <span className="block text-gray-700">Genres</span>
-        <input 
-          type="text" 
-          className="form-group-input border rounded p-2 w-full" 
-          value={genres} 
-          onChange={(e) => setGenres(e.target.value)} 
-          placeholder="Genres" 
-          required 
-        />
-      </label>
-      <label className="flex items-center mb-2">
-        <span className="text-gray-700 mr-2">Single</span>
-        <input 
-          type="checkbox" 
-          checked={single} 
-          onChange={(e) => setSingle(e.target.checked)} 
-        />
-      </label>
-      <label className="mb-2">
-        <span className="block text-gray-700">Reproductions</span>
-        <input 
-          type="number" 
-          className="form-group-input border rounded p-2 w-full" 
-          value={reproductions} 
-          onChange={(e) => setReproductions(e.target.value)} 
-          placeholder="Reproductions" 
-          required 
-        />
-      </label>
-      <button type="submit" className="form-group-button bg-blue-500 text-white p-2 rounded">Add Song</button>
+      <input type="number" className='form-group-input' value={reproductions} onChange={(e) => setReproductions(e.target.value)} placeholder="Reproductions" required />
+      <input type="number" className='form-group-input' value={listener} onChange={(e) => setListener(e.target.value)} placeholder="Listener" required />
+      <button type="submit" className="form-group-button">Add Song</button>
     </form>
   );
 }
