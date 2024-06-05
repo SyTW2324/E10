@@ -77,15 +77,15 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.post('/api/songs', async (req, res) => {
-    const { name, author, duration, genres, single, reproductions, listener } = req.body;
+    const { name, author, duration, genres, single, reproductions } = req.body;
 
     // Validar datos de entrada
-    if (!name || !author || !duration || !genres || !reproductions || !listener) {
+    if (!name || !author || !duration || !genres || !reproductions) {
         return res.status(400).json({ message: 'Por favor, proporciona los datos requeridos correctamente' });
     }
 
     // Crear nueva canción
-    const newSong = new Song({ name, author, duration, genres, single, reproductions, listener});
+    const newSong = new Song({ name, author, duration, genres, single, reproductions});
 
     try {
         await newSong.save();
