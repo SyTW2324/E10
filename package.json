@@ -1,0 +1,13 @@
+{
+	"scripts":{
+		"start": "npm run start:frontend & npm run start:backend",
+		"start:frontend":"cd frontend && npm run start",
+		"start:backend":"cd backend && npm run start"
+	},
+	"engines":{
+		"node": "18.x",
+		"npm": "10.x"
+	}
+}
+
+
