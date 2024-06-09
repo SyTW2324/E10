@@ -133,6 +133,10 @@ app.get('*', (req, res) => {
 });
 
 // Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`El servidor está funcionando en el puerto ${PORT}`);
+
+
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port;
+  console.log(`Express is working on port ${port}`);
 });
+
