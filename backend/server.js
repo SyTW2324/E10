@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 // Configurar CORS
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://musicwiki-b09c03390eba.herokuapp.com'],
+  origin: ['https://musicwiki-b09c03390eba.herokuapp.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
