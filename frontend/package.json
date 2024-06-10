@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && serve -s build",
+    "build": "react-scripts build",
     "test": "npx jest",
     "eject": "react-scripts eject",
     "format": "npx prettier --write ."
