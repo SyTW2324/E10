@@ -10,14 +10,14 @@ const Song = require('./models/song');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 // Middleware para parsear el cuerpo de las solicitudes
 app.use(bodyParser.json());
 
 // Configurar CORS
 app.use(cors({
-    origin: 'http://localhost:3000', // Permitir solicitudes desde el frontend
+    origin: ['http://localhost:3000','https://musicwiki-b09c03390eba.herokuapp.com/'], // Permitir solicitudes desde el frontend
 }));
 
 // Codificar la contraseña
