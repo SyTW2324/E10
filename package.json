@@ -3,10 +3,14 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "start": " node backend/server.js",
-      "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install"
+        "start": " node backend/server.js",
+        "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm install"
     },
     "engines": {
-      "node": "14.x"
+        "node": "18.x",
+        "npm": "10.x"
+    },
+    "dependencies": {
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
     }
-  }
+}
