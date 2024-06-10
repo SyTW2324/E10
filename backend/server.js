@@ -7,10 +7,10 @@ const cors = require('cors'); // Importar el middleware cors para que permita pe
 const User = require('./models/user');
 const Song = require('./models/song');
 
-dotenv.config();
+dotenv.config({path: './backend/.env'});
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 // Middleware para parsear el cuerpo de las solicitudes
 app.use(bodyParser.json());
@@ -22,9 +22,13 @@ app.use(cors({
 
 // Codificar la contraseña
 const encodedPassword = encodeURIComponent(process.env.MONGO_PASSWORD);
-
+let dbURI = '';
 // Construir el URI de conexión con la contraseña codificada
-const dbURI = process.env.MONGO_URI.replace('<password>', encodedPassword);
+if (process.env.MONGO_URI) {
+    dbURI = process.env.MONGO_URI.replace('<password>', encodedPassword);
+  } else {
+    console.error('MONGO_URI is not defined');
+  }
 
 // Conectar a MongoDB Atlas
 mongoose.connect(dbURI)
