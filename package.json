@@ -1,14 +1,15 @@
 {
 	"scripts": {
-  		"start": "node server.js",
+		"start": "node server.js",
 		"heroku-postbuild": "cd frontend && npm install && npm run build",
-  		"start:backend": "cd backend && npm run start"
+		"start:backend": "cd backend && npm run start"
 	},
 	"engines": {
 		"node": "18.x",
 		"npm": "10.x"
 	},
 	"devDependencies": {
+		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
 		"serve": "^14.2.3"
 	}
 }
