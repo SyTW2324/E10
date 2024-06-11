@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// Definir la URL base del backend
-const BASE_URL = 'https://musicwiki-b09c03390eba.herokuapp.com';
+// Definir la URL base del backend https://musicwiki-b09c03390eba.herokuapp.com
+const BASE_URL = 'http://localhost:5000';
 
 // Acción para registrar un usuario
 export const registerUser = createAsyncThunk(

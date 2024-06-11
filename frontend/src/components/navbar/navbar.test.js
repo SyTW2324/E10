@@ -1,29 +1,50 @@
-// import React from 'react';
-// import { render, fireEvent } from '@testing-library/react';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import Header from './navbar.component';
+import React from 'react';
+import { act } from 'react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { render } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from './navbar.component';
+import userReducer from '../../redux/reducers/userReducer';
+import '@testing-library/jest-dom';
 
-// describe('Header tests', () => {
-//   it.only('renderiza sin errores', () => {
-//     render(<Router><Header /></Router>);
-//   });
+const store = configureStore({
+    reducer: {
+      user: userReducer,
+    },
+});
 
-//   it('muestra el logo correctamente', () => {
-//     const { getByText } = render(<Router><Header /></Router>);
-//     expect(getByText('MusicWiki')).toBeInTheDocument();
-//   });
+describe('Header tests', () => {
+  it('renderiza sin errores', () => {
+    render(
+        <Provider store={store}>
+          <Router>
+            <Header />
+          </Router>
+        </Provider>
+      );
+  });
 
-//   it('muestra los links de navegacion correctamente', () => {
-//     const { getByText } = render(<Router><Header /></Router>);
-//     expect(getByText('Registrarse')).toBeInTheDocument();
-//     expect(getByText('Iniciar Sesión')).toBeInTheDocument();
-//   });
+  it('muestra el logo correctamente', () => {
+    const { getByText } = render(
+        <Provider store={store}>
+          <Router>
+            <Header />
+          </Router>
+        </Provider>
+      );
+    expect(getByText('MusicWiki')).toBeInTheDocument();
+  });
 
-//   it('comprueba el correcto mostrado de los links cuando se pulsa un enlace', () => {
-//     const { getByRole, queryByText } = render(<Router><Header /></Router>);
-//     const menuIcon = getByRole('button');
-//     fireEvent.click(menuIcon);
-//     expect(queryByText('Registrarse')).toBeVisible();
-//     expect(queryByText('Iniciar Sesión')).toBeVisible();
-//   });
-// });
+  it('muestra los links de navegacion correctamente', () => {
+    const { getByText } = render(
+        <Provider store={store}>
+          <Router>
+            <Header />
+          </Router>
+        </Provider>
+      );
+    expect(getByText('Registrarse')).toBeInTheDocument();
+    expect(getByText('Iniciar Sesión')).toBeInTheDocument();
+  });
+});

@@ -1,28 +1,64 @@
-// import React from 'react';
-// import { render } from '@testing-library/react';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import Footer from './footer';
+import React from 'react';
+import { render } from '@testing-library/react';
+import { act } from 'react';
+import { Provider } from 'react-redux';
+import userReducer from '../../redux/reducers/userReducer';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import Footer from './footer';
+import '@testing-library/jest-dom';
 
-// describe('Footer', () => {
-//   it.only('renderiza sin errores', () => {
-//     render(<Router><Footer /></Router>);
-//   });
 
-//   it('muestra el logo correctamente', () => {
-//     const { getByText } = render(<Router><Footer /></Router>);
-//     expect(getByText('MusicWiki')).toBeInTheDocument();
-//   });
+const store = configureStore({
+    reducer: {
+      user: userReducer,
+    },
+  });
 
-//   it('muestra los links de navegacion correctamente', () => {
-//     const { getByText } = render(<Router><Footer /></Router>);
-//     expect(getByText('Registrarse')).toBeInTheDocument();
-//     expect(getByText('Iniciar Sesión')).toBeInTheDocument();
-//   });
+describe('Footer', () => {
+  it('renderiza sin errores', () => {
+    render(
+        <Provider store={store}>
+          <Router>
+            <Footer />
+          </Router>
+        </Provider>
+      );
+  });
 
-//   it('muestra la informacion de copyright correctamente', () => {
-//     const { getByText } = render(<Router><Footer /></Router>);
-//     expect(getByText('© 2024 Appy. Todos los derechos reservados.')).toBeInTheDocument();
-//     expect(getByText('Términos · Política de Privacidad')).toBeInTheDocument();
-//     expect(getByText('Grupo E10 - Micaela - Carla - Carlos')).toBeInTheDocument();
-//   });
-// });
+  it('muestra el logo correctamente', () => {
+    const { getByText } = render(
+        <Provider store={store}>
+          <Router>
+            <Footer />
+          </Router>
+        </Provider>
+      );
+    expect(getByText('MusicWiki')).toBeInTheDocument();
+  });
+
+  it('muestra los links de navegacion correctamente', () => {
+    const { getByText } = render(
+        <Provider store={store}>
+          <Router>
+            <Footer />
+          </Router>
+        </Provider>
+      );
+    expect(getByText('Registrarse')).toBeInTheDocument();
+    expect(getByText('Iniciar Sesión')).toBeInTheDocument();
+  });
+
+  it('muestra la informacion de copyright correctamente', () => {
+    const { getByText } = render(
+        <Provider store={store}>
+          <Router>
+            <Footer />
+          </Router>
+        </Provider>
+      );
+    expect(getByText('© 2024 MusicWiki. Todos los derechos reservados.')).toBeInTheDocument();
+    expect(getByText('Términos · Política de Privacidad')).toBeInTheDocument();
+    expect(getByText('Equipo MusicWiki')).toBeInTheDocument();
+  });
+});

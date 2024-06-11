@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const BASE_URL = 'https://musicwiki-b09c03390eba.herokuapp.com';
+// 'https://musicwiki-b09c03390eba.herokuapp.com'
+const BASE_URL = 'http://localhost:5000';
 
 export const addSong = createAsyncThunk(
   'song/addSong',
