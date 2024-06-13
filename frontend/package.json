@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "npx jest --coverage && coveralls < coverage/lcov.info",
     "eject": "react-scripts eject",
-    "format": "npx prettier --write .",
+    "format": "npx prettier --write ."
   },
   "eslintConfig": {
     "extends": [
