@@ -28,10 +28,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npx jest",
+    "test": "npx jest --coverage && coveralls < coverage/lcov.info",
     "eject": "react-scripts eject",
     "format": "npx prettier --write .",
-    "coverage": "c8 npm test && c8 report --reporter=lcov"
   },
   "eslintConfig": {
     "extends": [
