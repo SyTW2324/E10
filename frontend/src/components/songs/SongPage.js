@@ -56,23 +56,25 @@ const SongPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-lavender-web text-lavender-web">
-            <div className="max-w-4xl w-full p-8 rounded-lg shadow-lg text-center bg-tropical-indigo text-lavender-web">
-                <h1 className="text-3xl font-bold mb-4 text-ultra-violet">Canciones disponibles actualmente</h1>
-                {error && <div className="text-red-500">{error}</div>}
+            <div className="max-w-4xl w-full p-5 rounded-lg shadow-lg text-center bg-tropical-indigo text-lavender-web">
+                <h1 className="text-3xl font-bold mb-4 text-ultra-violet">
+                    {showForm ? "Agregar Canción" : "Canciones disponibles actualmente"}
+                </h1>
+                {error && <div className="text-cardinal">{error}</div>}
                 {!showForm && (
                     <>
-                        <table className="w-full mb-4 text-left text-lavender-web">
+                        <table className="w-full mb-2 text-left text-lavender-web">
                             <thead>
                                 <tr>
-                                    <th className="p-2 text-ultra-violet">Nombre de la canción</th>
-                                    <th className="p-2 text-ultra-violet">Autor</th>
+                                    <th className="px-1 text-ultra-violet">Nombre de la canción</th>
+                                    <th className="px-1 text-ultra-violet">Autor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {songs.map((song) => (
                                     <tr key={song.id} onClick={() => handleSongClick(song)} className="cursor-pointer hover:bg-ultra">
-                                        <td className="p-2">{song.name}</td>
-                                        <td className="p-2">{song.author}</td>
+                                        <td className="px-1">{song.name}</td>
+                                        <td className="px-1">{song.author}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -84,9 +86,9 @@ const SongPage = () => {
                     <AddSongForm onSubmit={handleAddSong} />
                 )}
                 {selectedSong && (
-                    <div className="p-4">
-                        <div className="h-6"></div>
-                        <h2 className="text-2xl font-bold mb-2 text-ultra-violet">Detalles de la canción</h2>
+                    <div className="p-2">
+                        <div className="h-4"></div>
+                        <h2 className="text-2xl font-bold mb-1 text-ultra-violet">Detalles de la canción</h2>
                         <p><strong className="text-ultra-violet">Nombre:</strong> {selectedSong.name}</p>
                         <p><strong className="text-ultra-violet">Autor:</strong> {selectedSong.author}</p>
                         <p><strong className="text-ultra-violet">Duración:</strong> {selectedSong.duration} minutos</p>
@@ -95,7 +97,7 @@ const SongPage = () => {
                         <p><strong className="text-ultra-violet">Single:</strong> {selectedSong.single ? 'Sí' : 'No'}</p>
                         <div className="h-4"></div>
                         <textarea
-                            className="w-full p-2 border border-gray-300 rounded bg-lavender-web text-night"
+                            className="w-full p-2 border border-gray-300 rounded bg-lavender-web text-black"
                             rows="4"
                             value={lyrics}
                             onChange={(e) => setLyrics(e.target.value)}

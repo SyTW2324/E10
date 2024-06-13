@@ -2,6 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+main {
+  flex-grow: 1;
+}
+
+
 body {
   margin: 0;
   display: flex;
