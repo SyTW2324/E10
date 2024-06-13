@@ -29,5 +29,13 @@ jobs:
         key: ${{ runner.OS }}-node-${{ hashFiles('frontend/package-lock.json') }}
         restore-keys: |
           ${{ runner.OS }}-node-
+    - name: Install dependencies and run tests in frontend
+      run: |
+        cd frontend
+        npm install
+        npm coverage
     - name: Coveralls
-      run: coverallsapp/github-action@v2
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: frontend/coverage/lcov.info
