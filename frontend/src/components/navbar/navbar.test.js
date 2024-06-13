@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './navbar.component';
 import userReducer from '../../redux/reducers/userReducer';
 import '@testing-library/jest-dom';
-
 const store = configureStore({
     reducer: {
       user: userReducer,
@@ -24,7 +23,6 @@ describe('Header tests', () => {
         </Provider>
       );
   });
-
   it('muestra el logo correctamente', () => {
     const { getByText } = render(
         <Provider store={store}>
@@ -35,7 +33,6 @@ describe('Header tests', () => {
       );
     expect(getByText('MusicWiki')).toBeInTheDocument();
   });
-
   it('muestra los links de navegacion correctamente', () => {
     const { getByText } = render(
         <Provider store={store}>

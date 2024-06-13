@@ -3,12 +3,10 @@ import { registerUser, loginUser, logoutUser } from './userActions';
 
 jest.mock('axios');
 
-
 describe('userActions', () => {
   const BASE_URL = 'https://musicwiki-b09c03390eba.herokuapp.com';
   const dispatch = jest.fn();
   const getState = jest.fn();
-  
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -16,10 +14,8 @@ describe('userActions', () => {
   it('dispatches registerUser action and returns data on success', async () => {
     const expectedData = { data: 'data' };
     const userData = { username: 'test', password: 'test' };
-
     // Mock the post method of axios
     axios.post.mockResolvedValueOnce({ data: expectedData });
-
     await registerUser(userData)(dispatch, getState, {});
 
     expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/api/register`, userData);
