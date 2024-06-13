@@ -23,10 +23,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i
-    - name: Change directory and run tests
+    - name: Install dependencies and run tests in subdirectory
       run: |
         cd frontend
+        npm install
         npm test
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2.1.0
