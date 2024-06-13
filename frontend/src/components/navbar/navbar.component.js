@@ -13,7 +13,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     await dispatch(logoutUser());
-    navigate('/login'); // Redirige al usuario al formulario de inicio de sesión
+    navigate('/login');
   };
 
   const Links = user
@@ -24,27 +24,24 @@ const Header = () => {
       ];
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-gray-900 text-white">
+    <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-tropical-indigo text-lavender-web">
       <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
-        {/* Logo section */}
-        <Link to="/home" className="font-bold text-2xl cursor-pointer flex items-center gap-1 text-blue-400">
-          <MusicalNoteIcon className="w-7 h-7" />
-          <span>MusicWiki</span>
+        <Link to="/home" className="font-bold text-2xl cursor-pointer flex items-center gap-1 text-lavender-web">
+          <MusicalNoteIcon className="w-7 h-7 text-lavender-web" />
+          MusicWiki
         </Link>
-        {/* Menu icon */}
         <div onClick={() => setOpen(!open)} className="absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7">
           {open ? <XMarkIcon /> : <Bars3BottomRightIcon />}
         </div>
-        {/* Link items */}
-        <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-gray-900 md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
+        <ul className={`md:flex md:items-center md:pb-0 pb-4 absolute md:static bg-tropical-indigo md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
           {Links.map((link, index) => (
-            <li className="md:ml-8 md:my-0 my-7 font-semibold" key={index}>
+            <li key={index} className="md:ml-8 md:my-0 my-4">
               {link.link ? (
-                <Link to={link.link} className="text-white hover:text-blue-400 duration-500">
+                <Link to={link.link} className="hover:text-ultra-violet">
                   {link.name}
                 </Link>
               ) : (
-                <button onClick={link.onClick} className="text-white hover:text-blue-400 duration-500">
+                <button onClick={link.onClick} className="hover:text-ultra-violet">
                   {link.name}
                 </button>
               )}

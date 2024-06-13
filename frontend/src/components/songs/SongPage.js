@@ -19,23 +19,23 @@ const SongPage = () => {
         dispatch(fetchSongs());
         const intervalId = setInterval(() => {
             dispatch(fetchSongs());
-        }, 1000);
+        }, 5000);
 
         return () => {
             clearInterval(intervalId);
         };
     }, [dispatch]);
 
-    const handleAddSong = (song) => {
-        dispatch(addSong(song));
-        setShowForm(false);
-    };
-
     useEffect(() => {
         if (!user) {
             navigate('/login');
         }
     }, [user, navigate]);
+
+    const handleAddSong = (song) => {
+        dispatch(addSong(song));
+        setShowForm(false);
+    };
 
     const handleSongClick = (song) => {
         setSelectedSong(song);
@@ -55,55 +55,54 @@ const SongPage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-400">
-            <div className="max-w-4xl w-full space-y-8 bg-gray-900 p-8 rounded shadow-md text-center">
-                {error && <div className="text-red-500 text-sm">{error}</div>}
+        <div className="flex flex-col items-center justify-center min-h-screen bg-lavender-web text-lavender-web">
+            <div className="max-w-4xl w-full p-8 rounded-lg shadow-lg text-center bg-tropical-indigo text-lavender-web">
+                <h1 className="text-3xl font-bold mb-4 text-ultra-violet">Canciones disponibles actualmente</h1>
+                {error && <div className="text-red-500">{error}</div>}
                 {!showForm && (
                     <>
-                        <h1 className="text-4xl font-bold mb-4 text-blue-700">Canciones disponibles actualmente</h1>
-                        <table className="w-full mb-4 table-auto">
+                        <table className="w-full mb-4 text-left text-lavender-web">
                             <thead>
                                 <tr>
-                                    <th className="border-b-2 p-2 text-blue-500">Nombre de la canción</th>
-                                    <th className="border-b-2 p-2 text-blue-500">Autor</th>
+                                    <th className="p-2 text-ultra-violet">Nombre de la canción</th>
+                                    <th className="p-2 text-ultra-violet">Autor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {songs.map((song) => (
-                                    <tr key={song.id} onClick={() => handleSongClick(song)} className="cursor-pointer hover:bg-gray-100">
-                                        <td className="border-b p-2 text-blue-500 hover:underline">{song.name}</td>
-                                        <td className="border-b p-2 text-blue-500">{song.author}</td>
+                                    <tr key={song.id} onClick={() => handleSongClick(song)} className="cursor-pointer hover:bg-ultra">
+                                        <td className="p-2">{song.name}</td>
+                                        <td className="p-2">{song.author}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        <button className="w-full py-2 px-4 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded-md hover:from-purple-700 hover:to-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" onClick={() => setShowForm(true)}>Añadir Canción</button>
+                        <button onClick={() => setShowForm(true)} className="py-2 px-4 bg-ultra hover:bg-ultra-violet text-lavander-web rounded-lg transition duration-200 ease-in-out">Añadir Canción</button>
                     </>
                 )}
                 {showForm && (
-                    <div>
-                        <p className="text-gray-300 text-lg mb-4">En el siguiente formulario podrás añadir una canción a la base de datos de MusicWiki</p>
-                        <AddSongForm onSubmit={handleAddSong} />
-                    </div>
+                    <AddSongForm onSubmit={handleAddSong} />
                 )}
                 {selectedSong && (
-                    <div className="mt-4 p-4 border-t border-gray-300 w-full text-left">
-                        <h2 className="text-2xl font-bold mb-2">Detalles de la canción</h2>
-                        <p><strong>Nombre:</strong> {selectedSong.name}</p>
-                        <p><strong>Autor:</strong> {selectedSong.author}</p>
-                        <p><strong>Duración:</strong> {selectedSong.duration} minutos</p>
-                        <p><strong>Géneros:</strong> {selectedSong.genres}</p>
-                        <p><strong>Reproducciones:</strong> {selectedSong.reproductions}</p>
-                        <p><strong>Single:</strong> {selectedSong.single ? 'Sí' : 'No'}</p>
+                    <div className="p-4">
+                        <div className="h-6"></div>
+                        <h2 className="text-2xl font-bold mb-2 text-ultra-violet">Detalles de la canción</h2>
+                        <p><strong className="text-ultra-violet">Nombre:</strong> {selectedSong.name}</p>
+                        <p><strong className="text-ultra-violet">Autor:</strong> {selectedSong.author}</p>
+                        <p><strong className="text-ultra-violet">Duración:</strong> {selectedSong.duration} minutos</p>
+                        <p><strong className="text-ultra-violet">Géneros:</strong> {selectedSong.genres}</p>
+                        <p><strong className="text-ultra-violet">Reproducciones:</strong> {selectedSong.reproductions}</p>
+                        <p><strong className="text-ultra-violet">Single:</strong> {selectedSong.single ? 'Sí' : 'No'}</p>
+                        <div className="h-4"></div>
                         <textarea
-                            className="w-full p-2 border border-gray-300 rounded mt-2"
+                            className="w-full p-2 border border-gray-300 rounded bg-lavender-web text-night"
                             rows="4"
                             value={lyrics}
                             onChange={(e) => setLyrics(e.target.value)}
                             placeholder="Añadir letra de la canción aquí"
                         ></textarea>
-                        <button className="mt-2 py-2 px-4 bg-gradient-to-b from-purple-800 to-purple-900 text-white rounded-md hover:from-purple-700 hover:to-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" onClick={handleUpdateLyrics}>Guardar Letra</button>
-                        <button className="mt-2 py-2 px-4 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" onClick={() => setSelectedSong(null)}>Cerrar</button>
+                        <button className="mt-2 py-2 px-4 bg-ultra hover:bg-ultra-violet text-lavander-web rounded-lg transition duration-200 ease-in-out mr-4" onClick={handleUpdateLyrics}>Guardar Letra</button>
+                        <button className="mt-2 py-2 px-4 bg-ultra hover:bg-ultra-violet text-lavander-web rounded-lg transition duration-200 ease-in-out" onClick={() => setSelectedSong(null)}>Cerrar</button>
                         {message && <p className={`mt-2 text-sm ${message.startsWith('Error') ? 'text-red-500' : 'text-green-500'}`}>{message}</p>}
                     </div>
                 )}

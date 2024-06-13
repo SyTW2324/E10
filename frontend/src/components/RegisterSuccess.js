@@ -13,11 +13,11 @@ export function RegisterSuccess() {
   }, [user, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-400">
-      <div className="max-w-md w-full space-y-8 bg-gray-900 p-8 rounded shadow-md text-center">
-        <h1 className="text-4xl font-bold text-green-600 mb-4">Registro exitoso</h1>
-        <p className="text-gray-300 text-lg mb-6">¡Te has registrado correctamente!</p>
-        <button className="w-full py-2 px-4 bg-gradient-to-b from-blue-600 to-blue-800 text-white rounded-md hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" onClick={() => navigate('/songs')}>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-lavender-web">
+      <div className="max-w-md w-full space-y-8 p-8 rounded-lg shadow-lg text-center bg-tropical-indigo text-lavender-web">
+        <h1 className="text-4xl font-bold text-ultra-violet mb-4">Registro exitoso</h1>
+        <p className="text-lavender-web text-lg mb-6">¡Te has registrado correctamente!</p>
+        <button className="w-full py-2 px-4 bg-ultra hover:bg-ultra-violet text-lavander-web rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ultra-violet" onClick={() => navigate('/songs')}>
           Ir a la página de canciones
         </button>
       </div>

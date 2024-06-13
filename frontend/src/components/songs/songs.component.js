@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup'
-
-//queda pendiente arreglar el formato del componente y controlar que los datos sean correctos
+import * as Yup from 'yup';
 
 const AddSongForm = (props) => {
   const [name, setName] = useState('');
@@ -10,7 +8,7 @@ const AddSongForm = (props) => {
   const [genres, setGenres] = useState('');
   const [single, setSingle] = useState(false);
   const [reproductions, setReproductions] = useState('');
-  
+
   const songSchema = Yup.object().shape({
     name: Yup.string().required('El nombre de la canción es requerido'),
     author: Yup.string().required('El autor de la canción es requerido'),
@@ -46,17 +44,18 @@ const AddSongForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column',justifyContent: 'space-around', height: '100%'}}>
-      <input type="text" className='form-group-input' value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
-      <input type="text" className='form-group-input' value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" required />
-      <input type="number" className='form-group-input' value={duration} onChange={(e) => setDuration(e.target.value)} placeholder="Duration" required />
-      <input type="text" className='form-group-input' value={genres} onChange={(e) => setGenres(e.target.value)} placeholder="Genres" required />
-      <input type="number" className='form-group-input' value={reproductions} onChange={(e) => setReproductions(e.target.value)} placeholder="Reproductions" required />
-      <label style={{paddingRight: '0px'}}>
-        Single
+    <form onSubmit={handleSubmit} className="flex flex-col space-y-2 bg-tropical-indigo p-4 rounded-lg text-black">
+      <input type="text" className="form-input mb-2 p-2 rounded border border-gray-300" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
+      <input type="text" className="form-input mb-2 p-2 rounded border border-gray-300" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author" required />
+      <input type="number" className="form-input mb-2 p-2 rounded border border-gray-300" value={duration} onChange={(e) => setDuration(e.target.value)} placeholder="Duration" required />
+      <input type="text" className="form-input mb-2 p-2 rounded border border-gray-300" value={genres} onChange={(e) => setGenres(e.target.value)} placeholder="Genres" required />
+      <input type="number" className="form-input mb-2 p-2 rounded border border-gray-300" value={reproductions} onChange={(e) => setReproductions(e.target.value)} placeholder="Reproductions" required />
+      <div className="flex items-center justify-center space-x-2">
+        <label className="mr-2">Single</label>
         <input type="checkbox" checked={single} onChange={(e) => setSingle(e.target.checked)} />
-      </label>
-      <button type="submit" className="form-group-button">Add Song</button>
+      </div>
+      <div className="h-6"></div>
+      <button type="submit" className="mt-4 py-2 px-4 bg-ultra hover:bg-ultra-violet text-lavender-web rounded-lg transition duration-200 ease-in-out">Añadir Cancion</button>
     </form>
   );
 }
