@@ -1,50 +1,38 @@
-// import React from 'react';
-// import { render, fireEvent, getAllByText} from '@testing-library/react';
-// import { createMemoryHistory } from 'history';
-// import {MemoryRouter as Router} from 'react-router-dom';
-// import { Provider } from 'react-redux';
-// import { configureStore } from '@reduxjs/toolkit';
-// import userReducer from './redux/reducers/userReducer';
-// import App from './App';
+import React from 'react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './redux/reducers/userReducer';
+import App from './App';
 
-// describe('App tests', () => {
+describe('App tests', () => {
 
-//   let store;
+    const store = configureStore({
+        reducer: {
+          user: userReducer
+        }
+    });
 
-//   beforeEach(() => {
-//     store = configureStore({
-//       reducer: userReducer,
-//     });
-//   });
+    it('renderiza sin errores', () => {
+        render(
+          <Provider store={store}>
+            <App />
+          </Provider>
+        );
+    });
 
-//   it('renderiza sin errores', () => {
-//     render(<App />);
-//   });
+    it('navigates to /login when its link is clicked', async () => {
+        const { getAllByText } = render(
+          <Provider store={store}>
+            <App />
+          </Provider>
+        );
 
-//   it.only('navigates to /login when its link is clicked', async () => {
-//     const history = createMemoryHistory();
-//     const { getAllByText } = render(
-//       <Provider store={store}> 
-//         <App initialEntries={['/']} initialIndex={0} history={history}/>
-//       </Provider>
-//     );
-  
-//     const loginLinks = getAllByText(/Iniciar Sesión/i);
-//     fireEvent.click(loginLinks[0]);
-  
-//     expect(history.location.pathname).toBe('/login');
-//     });
+        const loginLinks = getAllByText(/Iniciar Sesión/i); // adjust this to select the correct link
+        fireEvent.click(loginLinks[0]);
 
-//   it('navigates to /signup when its link is clicked', async () => {
-//     const history = createMemoryHistory();
-//     history.push('/signup');
-//     render(
-//       <Provider store={store}>
-//         <Router history={history}>
-//           <App />
-//         </Router>
-//       </Provider>
-//     );
-//     expect(screen.getByText(/signup component content/i)).toBeInTheDocument();
-//   });
-// });
+        await waitFor(() => {
+            expect(window.location.pathname).toBe('/login');
+        });
+    });
+});

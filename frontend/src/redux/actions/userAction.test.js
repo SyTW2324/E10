@@ -5,7 +5,7 @@ jest.mock('axios');
 
 
 describe('userActions', () => {
-  const BASE_URL = 'http://localhost:5000';
+  const BASE_URL = 'https://musicwiki-b09c03390eba.herokuapp.com';
   const dispatch = jest.fn();
   const getState = jest.fn();
   

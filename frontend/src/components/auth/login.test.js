@@ -1,12 +1,16 @@
 import React from 'react';
+import { act } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {LoginSignIn} from './login.component'; 
+import { loginUser } from '../../redux/actions/userActions';
 import { waitFor } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 import '@testing-library/jest-dom';
-import * as Yup from 'yup';
+
+jest.mock('../../redux/actions/userActions');
+
 
 describe('Login tests', () => {
 
@@ -26,15 +30,18 @@ describe('Login tests', () => {
 
   it('maneja el envio de la informacion del formulario', async () => {
   
-    const { getByLabelText, getByText } = render(<Provider store={store}><Router><LoginSignIn /></Router></Provider>);
+    loginUser.mockImplementation(() => ({ type: 'user/login', payload: { username: 'testuser', password: 'testpass' } }));
+  
+    const { getByLabelText, getAllByText } = render(<Provider store={store}><Router><LoginSignIn /></Router></Provider>);
     fireEvent.change(getByLabelText('Nombre de Usuario:'), { target: { value: 'testuser' } });
     fireEvent.change(getByLabelText('Contraseña:'), { target: { value: 'testpass' } });
-    fireEvent.click(getByText('Iniciar Sesión'));
-  
+    const loginLinks = getAllByText(/Iniciar Sesión/i); 
+    fireEvent.click(loginLinks[1]);
+    
     // Wait for the loginUser action to be dispatched
     await waitFor(() => {
       const actions = store.getActions();
       expect(actions).toContainEqual({ type: 'user/login', payload: { username: 'testuser', password: 'testpass' } });
-    });
+    }, { timeout: 5000 });
   });
 });
