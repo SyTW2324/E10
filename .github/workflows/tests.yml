@@ -34,8 +34,9 @@ jobs:
         cd frontend
         npm install
         npm test
-    - name: Coveralls
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: frontend/coverage/lcov.info
+        - name: Run tests and send coverage to Coveralls
+        run: |
+          cd frontend
+          npm run coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
