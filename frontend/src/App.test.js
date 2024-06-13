@@ -21,7 +21,7 @@ describe('App tests', () => {
         );
     });
 
-    it.only('navigates to /login when its link is clicked', async () => {
+    it('navigates to /login when its link is clicked', async () => {
         const { getAllByText } = render(
           <Provider store={store}>
             <App />
