@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npx jest --coverage && coveralls < coverage/lcov.info",
+    "test": "npx jest --coverage",
     "eject": "react-scripts eject",
     "format": "npx prettier --write ."
   },
