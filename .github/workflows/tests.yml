@@ -33,7 +33,7 @@ jobs:
       run: |
         cd frontend
         npm install
-        npm coverage
+        npm test
     - name: Coveralls
       uses: coverallsapp/github-action@v1.1.2
       with:
